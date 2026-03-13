@@ -1,6 +1,7 @@
 import { Form } from '@inertiajs/react';
 import { Eye, EyeOff, LockKeyhole, RefreshCw } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import AlertError from '@/components/alert-error';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,6 +24,7 @@ export default function TwoFactorRecoveryCodes({
     fetchRecoveryCodes,
     errors,
 }: Props) {
+    const { t } = useTranslation();
     const [codesAreVisible, setCodesAreVisible] = useState<boolean>(false);
     const codesSectionRef = useRef<HTMLDivElement | null>(null);
     const canRegenerateCodes = recoveryCodesList.length > 0 && codesAreVisible;
@@ -57,11 +59,10 @@ export default function TwoFactorRecoveryCodes({
             <CardHeader>
                 <CardTitle className="flex gap-3">
                     <LockKeyhole className="size-4" aria-hidden="true" />
-                    2FA recovery codes
+                    {t('2FA recovery codes')}
                 </CardTitle>
                 <CardDescription>
-                    Recovery codes let you regain access if you lose your 2FA
-                    device. Store them in a secure password manager.
+                    {t('Recovery codes let you regain access if you lose your 2FA device. Store them in a secure password manager.')}
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -85,16 +86,19 @@ export default function TwoFactorRecoveryCodes({
                             options={{ preserveScroll: true }}
                             onSuccess={fetchRecoveryCodes}
                         >
-                            {({ processing }) => (
+                            {({ processing }) => {
+    const { t } = useTranslation();
+    return (
                                 <Button
                                     variant="secondary"
                                     type="submit"
                                     disabled={processing}
                                     aria-describedby="regenerate-warning"
                                 >
-                                    <RefreshCw /> Regenerate codes
+                                    <RefreshCw /> {t('Regenerate codes')}
                                 </Button>
-                            )}
+                            );
+}}
                         </Form>
                     )}
                 </div>
@@ -149,7 +153,7 @@ export default function TwoFactorRecoveryCodes({
                                         access your account and will be removed
                                         after use. If you need more, click{' '}
                                         <span className="font-bold">
-                                            Regenerate codes
+                                            {t('Regenerate codes')}
                                         </span>{' '}
                                         above.
                                     </p>

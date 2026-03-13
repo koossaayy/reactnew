@@ -1,5 +1,6 @@
 // Components
 import { Form, Head } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
@@ -8,22 +9,24 @@ import { logout } from '@/routes';
 import { send } from '@/routes/verification';
 
 export default function VerifyEmail({ status }: { status?: string }) {
+    const { t } = useTranslation();
     return (
         <AuthLayout
-            title="Verify email"
+            title={t('Verify email')}
             description="Please verify your email address by clicking on the link we just emailed to you."
         >
-            <Head title="Email verification" />
+            <Head title={t('Email verification')} />
 
             {status === 'verification-link-sent' && (
                 <div className="mb-4 text-center text-sm font-medium text-green-600">
-                    A new verification link has been sent to the email address
-                    you provided during registration.
+                    {t('A new verification link has been sent to the email address you provided during registration.')}
                 </div>
             )}
 
             <Form {...send.form()} className="space-y-6 text-center">
-                {({ processing }) => (
+                {({ processing }) => {
+    const { t } = useTranslation();
+    return (
                     <>
                         <Button disabled={processing} variant="secondary">
                             {processing && <Spinner />}
@@ -34,10 +37,11 @@ export default function VerifyEmail({ status }: { status?: string }) {
                             href={logout()}
                             className="mx-auto block text-sm"
                         >
-                            Log out
+                            {t('Log out')}
                         </TextLink>
                     </>
-                )}
+                );
+}}
             </Form>
         </AuthLayout>
     );
