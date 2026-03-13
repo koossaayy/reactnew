@@ -1,4 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -15,28 +16,30 @@ interface Props {
 }
 
 const breadcrumbs: BreadcrumbItem[] = [
-    { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Tags', href: '/tags' },
+    { title: t('Dashboard'), href: '/dashboard' },
+    { title: t('Tags'), href: '/tags' },
 ];
 
 export default function Index({ tags }: Props) {
+    const { t } = useTranslation();
+
     const { delete: destroy } = useForm();
 
     const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this tag?')) {
+        if (confirm(t('Are you sure you want to delete this tag?'))) {
             destroy(`/tags/${id}`);
         }
     };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Tags" />
+            <Head title={t('Tags')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between">
-                        <CardTitle>Tags</CardTitle>
+                        <CardTitle>{t('Tags')}</CardTitle>
                         <Button asChild>
-                            <Link href="/tags/create">Create Tag</Link>
+                            <Link href="/tags/create">{t('Create Tag')}</Link>
                         </Button>
                     </CardHeader>
                     <CardContent>
@@ -44,16 +47,16 @@ export default function Index({ tags }: Props) {
                             <table className="w-full text-sm">
                                 <thead className="border-b bg-muted/50">
                                     <tr>
-                                        <th className="p-4 text-left font-medium">Name</th>
-                                        <th className="p-4 text-left font-medium">Slug</th>
-                                        <th className="p-4 text-right font-medium">Actions</th>
+                                        <th className="p-4 text-left font-medium">{t('Name')}</th>
+                                        <th className="p-4 text-left font-medium">{t('Slug')}</th>
+                                        <th className="p-4 text-right font-medium">{t('Actions')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {tags.length === 0 ? (
                                         <tr>
                                             <td colSpan={3} className="p-4 text-center text-muted-foreground">
-                                                No tags found.
+                                                {t('No tags found.')}
                                             </td>
                                         </tr>
                                     ) : (
@@ -63,10 +66,10 @@ export default function Index({ tags }: Props) {
                                                 <td className="p-4">{tag.slug}</td>
                                                 <td className="p-4 text-right space-x-2">
                                                     <Button variant="outline" size="sm" asChild>
-                                                        <Link href={`/tags/${tag.id}/edit`}>Edit</Link>
+                                                        <Link href={`/tags/${tag.id}/edit`}>{t('Edit')}</Link>
                                                     </Button>
                                                     <Button variant="destructive" size="sm" onClick={() => handleDelete(tag.id)}>
-                                                        Delete
+                                                        {t('Delete')}
                                                     </Button>
                                                 </td>
                                             </tr>
