@@ -22,6 +22,21 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
     },
+    {
+        title: 'Categories',
+        href: '/categories',
+        icon: FolderGit2,
+    },
+    {
+        title: 'Tags',
+        href: '/tags',
+        icon: BookOpen,
+    },
+    {
+        title: 'Articles',
+        href: '/articles',
+        icon: LayoutGrid,
+    },
 ];
 
 const footerNavItems: NavItem[] = [

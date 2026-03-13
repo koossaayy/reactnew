@@ -8,6 +8,8 @@ import { initializeTheme } from '@/hooks/use-appearance';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+import { Toaster } from '@/components/ui/sonner';
+
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     resolve: (name) =>
@@ -22,6 +24,7 @@ createInertiaApp({
             <StrictMode>
                 <TooltipProvider delayDuration={0}>
                     <App {...props} />
+                    <Toaster position="bottom-right" />
                 </TooltipProvider>
             </StrictMode>,
         );
