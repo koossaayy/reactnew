@@ -28,7 +28,7 @@ class TagController extends Controller
         $validated['slug'] = Str::slug($validated['name']);
         
         Tag::create($validated);
-        return redirect()->route('tags.index')->with('success', 'Tag created successfully.');
+        return redirect()->route('tags.index')->with('success', __('Tag created successfully.'));
     }
 
     public function edit(Tag $tag)
@@ -44,12 +44,12 @@ class TagController extends Controller
         $validated['slug'] = Str::slug($validated['name']);
         
         $tag->update($validated);
-        return redirect()->route('tags.index')->with('success', 'Tag updated successfully.');
+        return redirect()->route('tags.index')->with('success', __('Tag updated successfully.'));
     }
 
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect()->route('tags.index')->with('success', 'Tag deleted successfully.');
+        return redirect()->route('tags.index')->with('success', __('Tag deleted successfully.'));
     }
 }
