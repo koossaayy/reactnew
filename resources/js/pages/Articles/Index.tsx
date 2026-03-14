@@ -1,4 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -34,23 +35,24 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index({ articles }: Props) {
+    const { t } = useTranslation();
     const { delete: destroy } = useForm();
 
     const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this article?')) {
+        if (confirm(t('Are you sure you want to delete this article?'))) {
             destroy(`/articles/${id}`);
         }
     };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Articles" />
+            <Head title={t('Articles')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between">
-                        <CardTitle>Articles</CardTitle>
+                        <CardTitle>{t('Articles')}</CardTitle>
                         <Button asChild>
-                            <Link href="/articles/create">Create Article</Link>
+                            <Link href="/articles/create">{t('Create Article')}</Link>
                         </Button>
                     </CardHeader>
                     <CardContent>
@@ -58,11 +60,11 @@ export default function Index({ articles }: Props) {
                             <table className="w-full text-sm">
                                 <thead className="border-b bg-muted/50">
                                     <tr>
-                                        <th className="p-4 text-left font-medium">Title</th>
-                                        <th className="p-4 text-left font-medium">Category</th>
-                                        <th className="p-4 text-left font-medium">Tags</th>
-                                        <th className="p-4 text-left font-medium">Status</th>
-                                        <th className="p-4 text-right font-medium">Actions</th>
+                                        <th className="p-4 text-left font-medium">{t('Title')}</th>
+                                        <th className="p-4 text-left font-medium">{t('Category')}</th>
+                                        <th className="p-4 text-left font-medium">{t('Tags')}</th>
+                                        <th className="p-4 text-left font-medium">{t('Status')}</th>
+                                        <th className="p-4 text-right font-medium">{t('Actions')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

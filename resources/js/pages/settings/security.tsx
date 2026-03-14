@@ -2,6 +2,7 @@ import { Transition } from '@headlessui/react';
 import { Form, Head } from '@inertiajs/react';
 import { ShieldCheck } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SecurityController from '@/actions/App/Http/Controllers/Settings/SecurityController';
 import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
@@ -35,6 +36,7 @@ export default function Security({
     requiresConfirmation = false,
     twoFactorEnabled = false,
 }: Props) {
+    const { t } = useTranslation();
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
 
@@ -52,15 +54,15 @@ export default function Security({
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Security settings" />
+            <Head title={t('Security settings')} />
 
-            <h1 className="sr-only">Security settings</h1>
+            <h1 className="sr-only">{t('Security settings')}</h1>
 
             <SettingsLayout>
                 <div className="space-y-6">
                     <Heading
                         variant="small"
-                        title="Update password"
+                        title={t('Update password')}
                         description="Ensure your account is using a long, random password to stay secure"
                     />
 
@@ -90,7 +92,7 @@ export default function Security({
                             <>
                                 <div className="grid gap-2">
                                     <Label htmlFor="current_password">
-                                        Current password
+                                        {t('Current password')}
                                     </Label>
 
                                     <PasswordInput
@@ -99,7 +101,7 @@ export default function Security({
                                         name="current_password"
                                         className="mt-1 block w-full"
                                         autoComplete="current-password"
-                                        placeholder="Current password"
+                                        placeholder={t('Current password')}
                                     />
 
                                     <InputError
@@ -109,7 +111,7 @@ export default function Security({
 
                                 <div className="grid gap-2">
                                     <Label htmlFor="password">
-                                        New password
+                                        {t('New password')}
                                     </Label>
 
                                     <PasswordInput
@@ -118,7 +120,7 @@ export default function Security({
                                         name="password"
                                         className="mt-1 block w-full"
                                         autoComplete="new-password"
-                                        placeholder="New password"
+                                        placeholder={t('New password')}
                                     />
 
                                     <InputError message={errors.password} />
@@ -126,7 +128,7 @@ export default function Security({
 
                                 <div className="grid gap-2">
                                     <Label htmlFor="password_confirmation">
-                                        Confirm password
+                                        {t('Confirm password')}
                                     </Label>
 
                                     <PasswordInput
@@ -134,7 +136,7 @@ export default function Security({
                                         name="password_confirmation"
                                         className="mt-1 block w-full"
                                         autoComplete="new-password"
-                                        placeholder="Confirm password"
+                                        placeholder={t('Confirm password')}
                                     />
 
                                     <InputError
@@ -171,7 +173,7 @@ export default function Security({
                     <div className="space-y-6">
                         <Heading
                             variant="small"
-                            title="Two-factor authentication"
+                            title={t('Two-factor authentication')}
                             description="Manage your two-factor authentication settings"
                         />
                         {twoFactorEnabled ? (

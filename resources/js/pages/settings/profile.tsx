@@ -1,5 +1,6 @@
 import { Transition } from '@headlessui/react';
 import { Form, Head, Link, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
 import DeleteUser from '@/components/delete-user';
 import Heading from '@/components/heading';
@@ -27,19 +28,20 @@ export default function Profile({
     mustVerifyEmail: boolean;
     status?: string;
 }) {
+    const { t } = useTranslation();
     const { auth } = usePage().props;
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Profile settings" />
+            <Head title={t('Profile settings')} />
 
-            <h1 className="sr-only">Profile settings</h1>
+            <h1 className="sr-only">{t('Profile settings')}</h1>
 
             <SettingsLayout>
                 <div className="space-y-6">
                     <Heading
                         variant="small"
-                        title="Profile information"
+                        title={t('Profile information')}
                         description="Update your name and email address"
                     />
 
@@ -62,7 +64,7 @@ export default function Profile({
                                         name="name"
                                         required
                                         autoComplete="name"
-                                        placeholder="Full name"
+                                        placeholder={t('Full name')}
                                     />
 
                                     <InputError
@@ -72,7 +74,7 @@ export default function Profile({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="email">Email address</Label>
+                                    <Label htmlFor="email">{t('Email address')}</Label>
 
                                     <Input
                                         id="email"
@@ -82,7 +84,7 @@ export default function Profile({
                                         name="email"
                                         required
                                         autoComplete="username"
-                                        placeholder="Email address"
+                                        placeholder={t('Email address')}
                                     />
 
                                     <InputError

@@ -1,5 +1,6 @@
 // Components
 import { Form, Head } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
@@ -8,12 +9,13 @@ import { logout } from '@/routes';
 import { send } from '@/routes/verification';
 
 export default function VerifyEmail({ status }: { status?: string }) {
+    const { t } = useTranslation();
     return (
         <AuthLayout
-            title="Verify email"
+            title={t('Verify email')}
             description="Please verify your email address by clicking on the link we just emailed to you."
         >
-            <Head title="Email verification" />
+            <Head title={t('Email verification')} />
 
             {status === 'verification-link-sent' && (
                 <div className="mb-4 text-center text-sm font-medium text-green-600">

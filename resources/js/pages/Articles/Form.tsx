@@ -1,4 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import AppLayout from '@/layouts/app-layout';
 import type { BreadcrumbItem } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -34,6 +35,7 @@ interface Props {
 }
 
 export default function Form({ article, categories, tags }: Props) {
+    const { t } = useTranslation();
     const isEditing = !!article;
     
     const { data, setData, post, put, errors, processing } = useForm({
@@ -45,9 +47,9 @@ export default function Form({ article, categories, tags }: Props) {
     });
 
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Dashboard', href: '/dashboard' },
-        { title: 'Articles', href: '/articles' },
-        { title: isEditing ? 'Edit Article' : 'Create Article', href: '#' },
+        { title: t('Dashboard'), href: '/dashboard' },
+        { title: t('Articles'), href: '/articles' },
+        { title: isEditing ? t('Edit Article') : t('Create Article'), href: '#' },
     ];
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -70,33 +72,33 @@ export default function Form({ article, categories, tags }: Props) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={isEditing ? 'Edit Article' : 'Create Article'} />
+            <Head title={isEditing ? t('Edit Article') : t('Create Article')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4 max-w-4xl mx-auto w-full">
                 <Card>
                     <CardHeader>
-                        <CardTitle>{isEditing ? 'Edit Article' : 'Create Article'}</CardTitle>
+                        <CardTitle>{isEditing ? t('Edit Article') : t('Create Article')}</CardTitle>
                     </CardHeader>
                     <form onSubmit={handleSubmit}>
                         <CardContent className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <Label htmlFor="title">Title</Label>
+                                    <Label htmlFor="title">{t('Title')}</Label>
                                     <Input
                                         id="title"
                                         value={data.title}
                                         onChange={(e) => setData('title', e.target.value)}
-                                        placeholder="Enter article title"
+                                        placeholder={t('Enter article title')}
                                     />
                                     {errors.title && <p className="text-sm text-red-500">{errors.title}</p>}
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="category">Category</Label>
+                                    <Label htmlFor="category">{t('Category')}</Label>
                                     <Select 
                                         value={data.category_id} 
                                         onValueChange={(value) => setData('category_id', value)}
                                     >
                                         <SelectTrigger id="category">
-                                            <SelectValue placeholder="Select a category" />
+                                            <SelectValue placeholder={t('Select a category')} />
                                         </SelectTrigger>
                                         <SelectContent>
                                             {categories.map((category) => (
@@ -111,19 +113,19 @@ export default function Form({ article, categories, tags }: Props) {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="content">Content</Label>
+                                <Label htmlFor="content">{t('Content')}</Label>
                                 <textarea
                                     id="content"
                                     className="flex min-h-[150px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                                     value={data.content}
                                     onChange={(e) => setData('content', e.target.value)}
-                                    placeholder="Write your article content here..."
+                                    placeholder={t('Write your article content here...')}
                                 />
                                 {errors.content && <p className="text-sm text-red-500">{errors.content}</p>}
                             </div>
 
                             <div className="space-y-3">
-                                <Label>Tags</Label>
+                                <Label>{t('Tags')}</Label>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 border rounded-md">
                                     {tags.map((tag) => (
                                         <div key={tag.id} className="flex items-center space-x-2">
@@ -148,15 +150,15 @@ export default function Form({ article, categories, tags }: Props) {
                                     checked={data.is_published}
                                     onCheckedChange={(checked) => setData('is_published', checked === true)}
                                 />
-                                <Label htmlFor="is_published" className="cursor-pointer">Publish this article</Label>
+                                <Label htmlFor="is_published" className="cursor-pointer">{t('Publish this article')}</Label>
                             </div>
                         </CardContent>
                         <CardFooter className="flex justify-between border-t pt-6">
                             <Button variant="outline" asChild>
-                                <Link href="/articles">Cancel</Link>
+                                <Link href="/articles">{t('Cancel')}</Link>
                             </Button>
                             <Button type="submit" disabled={processing}>
-                                {isEditing ? 'Update Article' : 'Create Article'}
+                                {isEditing ? t('Update Article') : t('Create Article')}
                             </Button>
                         </CardFooter>
                     </form>

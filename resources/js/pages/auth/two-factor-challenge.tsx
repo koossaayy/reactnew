@@ -1,6 +1,7 @@
 import { Form, Head } from '@inertiajs/react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,6 +15,7 @@ import AuthLayout from '@/layouts/auth-layout';
 import { store } from '@/routes/two-factor/login';
 
 export default function TwoFactorChallenge() {
+    const { t } = useTranslation();
     const [showRecoveryInput, setShowRecoveryInput] = useState<boolean>(false);
     const [code, setCode] = useState<string>('');
 
@@ -24,18 +26,18 @@ export default function TwoFactorChallenge() {
     }>(() => {
         if (showRecoveryInput) {
             return {
-                title: 'Recovery code',
+                title: t('Recovery code'),
                 description:
-                    'Please confirm access to your account by entering one of your emergency recovery codes.',
-                toggleText: 'login using an authentication code',
+                    t('Please confirm access to your account by entering one of your emergency recovery codes.'),
+                toggleText: t('login using an authentication code'),
             };
         }
 
         return {
-            title: 'Authentication code',
+            title: t('Authentication code'),
             description:
-                'Enter the authentication code provided by your authenticator application.',
-            toggleText: 'login using a recovery code',
+                t('Enter the authentication code provided by your authenticator application.'),
+            toggleText: t('login using a recovery code'),
         };
     }, [showRecoveryInput]);
 
@@ -50,7 +52,7 @@ export default function TwoFactorChallenge() {
             title={authConfigContent.title}
             description={authConfigContent.description}
         >
-            <Head title="Two-factor authentication" />
+            <Head title={t('Two-factor authentication')} />
 
             <div className="space-y-6">
                 <Form
@@ -66,7 +68,7 @@ export default function TwoFactorChallenge() {
                                     <Input
                                         name="recovery_code"
                                         type="text"
-                                        placeholder="Enter recovery code"
+                                        placeholder={t('Enter recovery code')}
                                         autoFocus={showRecoveryInput}
                                         required
                                     />
