@@ -11,6 +11,7 @@ import AuthLayout from '@/layouts/auth-layout';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
+import i18next from 'i18next';
 
 type Props = {
     status?: string;
@@ -25,10 +26,10 @@ export default function Login({
 }: Props) {
     return (
         <AuthLayout
-            title="Log in to your account"
+            title={i18next.t('Log in to your account')}
             description="Enter your email and password below to log in"
         >
-            <Head title="Log in" />
+            <Head title={i18next.t('Log in')} />
 
             <Form
                 {...store.form()}
@@ -39,7 +40,7 @@ export default function Login({
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">{i18next.t('Email address')}</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -55,14 +56,14 @@ export default function Login({
 
                             <div className="grid gap-2">
                                 <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
+                                    <Label htmlFor="password">{i18next.t('Password')}</Label>
                                     {canResetPassword && (
                                         <TextLink
                                             href={request()}
                                             className="ml-auto text-sm"
                                             tabIndex={5}
                                         >
-                                            Forgot password?
+                                            {i18next.t('Forgot password?')}
                                         </TextLink>
                                     )}
                                 </div>
@@ -72,7 +73,7 @@ export default function Login({
                                     required
                                     tabIndex={2}
                                     autoComplete="current-password"
-                                    placeholder="Password"
+                                    placeholder={i18next.t('Password')}
                                 />
                                 <InputError message={errors.password} />
                             </div>
@@ -83,7 +84,7 @@ export default function Login({
                                     name="remember"
                                     tabIndex={3}
                                 />
-                                <Label htmlFor="remember">Remember me</Label>
+                                <Label htmlFor="remember">{i18next.t('Remember me')}</Label>
                             </div>
 
                             <Button
@@ -94,27 +95,10 @@ export default function Login({
                                 data-test="login-button"
                             >
                                 {processing && <Spinner />}
-                                Log in
+                                {i18next.t('Log in')}
                             </Button>
                         </div>
 
                         {canRegister && (
                             <div className="text-center text-sm text-muted-foreground">
-                                Don't have an account?{' '}
-                                <TextLink href={register()} tabIndex={5}>
-                                    Sign up
-                                </TextLink>
-                            </div>
-                        )}
-                    </>
-                )}
-            </Form>
-
-            {status && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
-                    {status}
-                </div>
-            )}
-        </AuthLayout>
-    );
-}
+                                {i18next.t('Don\'t have an account?')}{' '} <TextLink href={register()} tabIndex={5}> {i18next.t('Sign up')} </TextLink> </div> )} </> )} </Form> {status && ( <div className="mb-4 text-center text-sm font-medium text-green-600"> {status} </div> )} </AuthLayout> ); } 
