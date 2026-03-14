@@ -9,6 +9,7 @@ import { initializeTheme } from '@/hooks/use-appearance';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 import { Toaster } from '@/components/ui/sonner';
+import './i18n';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
