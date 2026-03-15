@@ -80,12 +80,12 @@ class ArticleController extends Controller
             $article->tags()->detach();
         }
         
-        return redirect()->route('articles.index')->with('success', 'Article updated successfully.');
+        return redirect()->route('articles.index')->with('success', __('Article updated successfully.'));
     }
 
     public function destroy(Article $article)
     {
         $article->delete();
-        return redirect()->route('articles.index')->with('success', 'Article deleted successfully.');
+        return redirect()->route('articles.index')->with('success', __('Article deleted successfully.'));
     }
 }
