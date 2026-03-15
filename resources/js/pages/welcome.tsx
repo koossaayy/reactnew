@@ -1,6 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { dashboard, login, register } from '@/routes';
+import LanguageSwitcher from '@/components/language';
 
 export default function Welcome({
     canRegister = true,
@@ -53,13 +54,17 @@ export default function Welcome({
                     <main className="flex w-full max-w-[335px] flex-col-reverse lg:max-w-4xl lg:flex-row">
                         <div className="flex-1 rounded-br-lg rounded-bl-lg bg-white p-6 pb-12 text-[13px] leading-[20px] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                             <h1 className="mb-1 font-medium">
-                                {t('Let\'s get started')}
+                                {t("Let's get started")}
                             </h1>
                             <p className="mb-2 text-[#706f6c] dark:text-[#A1A09A]">
                                 {t('Laravel has an incredibly rich ecosystem.')}
                                 <br />
                                 {t('We suggest starting with the following.')}
                             </p>
+                            <p>
+                                <LanguageSwitcher locales={['en', 'fr']} />{' '}
+                            </p>
+
                             <ul className="mb-4 flex flex-col lg:mb-6">
                                 <li className="relative flex items-center gap-4 py-2 before:absolute before:top-1/2 before:bottom-0 before:left-[0.4rem] before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A]">
                                     <span className="relative bg-white py-1 dark:bg-[#161615]">

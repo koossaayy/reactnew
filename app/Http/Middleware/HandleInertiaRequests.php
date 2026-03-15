@@ -35,6 +35,9 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+            $locale = app()->getLocale(); // Already set by SetLocale middleware
+    $langFile = lang_path($locale . '.json');
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -46,6 +49,11 @@ class HandleInertiaRequests extends Middleware
                 'success' => $request->session()->get('success'),
                 'error' => $request->session()->get('error'),
             ],
+                    'locale' => $locale,
+        'translations' => file_exists($langFile)
+            ? json_decode(file_get_contents($langFile), true)
+            : [],
+
         ];
     }
 }

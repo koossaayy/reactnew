@@ -9,7 +9,8 @@ import { initializeTheme } from '@/hooks/use-appearance';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 import { Toaster } from '@/components/ui/sonner';
-import './i18n-setup';
+import './i18n-setup'; // side-effect: initializes i18next (already added by this PR)
+import i18next from 'i18next';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
@@ -19,6 +20,10 @@ createInertiaApp({
             import.meta.glob('./pages/**/*.tsx'),
         ),
     setup({ el, App, props }) {
+                const locale = (props.initialPage.props.locale as string) ?? 'en';
+        i18next.changeLanguage(locale);
+
+
         const root = createRoot(el);
 
         root.render(
