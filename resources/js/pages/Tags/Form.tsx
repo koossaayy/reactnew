@@ -22,9 +22,9 @@ export default function Form({ tag }: Props) {
     });
 
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Dashboard', href: '/dashboard' },
-        { title: 'Tags', href: '/tags' },
-        { title: isEditing ? 'Edit Tag' : 'Create Tag', href: '#' },
+        { title: t('Dashboard'), href: '/dashboard' },
+        { title: t('Tags'), href: '/tags' },
+        { title: isEditing ? t('Edit Tag') : t('Create Tag'), href: '#' },
     ];
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -38,31 +38,31 @@ export default function Form({ tag }: Props) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={isEditing ? 'Edit Tag' : 'Create Tag'} />
+            <Head title={isEditing ? t('Edit Tag') : t('Create Tag')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4 max-w-2xl mx-auto w-full">
                 <Card>
                     <CardHeader>
-                        <CardTitle>{isEditing ? 'Edit Tag' : 'Create Tag'}</CardTitle>
+                        <CardTitle>{isEditing ? t('Edit Tag') : t('Create Tag')}</CardTitle>
                     </CardHeader>
                     <form onSubmit={handleSubmit}>
                         <CardContent className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name">{t('Name')}</Label>
                                 <Input
                                     id="name"
                                     value={data.name}
                                     onChange={(e) => setData('name', e.target.value)}
-                                    placeholder="Enter tag name"
+                                    placeholder={t('Enter tag name')}
                                 />
                                 {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
                             </div>
                         </CardContent>
                         <CardFooter className="flex justify-between">
                             <Button variant="outline" asChild>
-                                <Link href="/tags">Cancel</Link>
+                                <Link href="/tags">{t('Cancel')}</Link>
                             </Button>
                             <Button type="submit" disabled={processing}>
-                                {isEditing ? 'Update Tag' : 'Create Tag'}
+                                {isEditing ? t('Update Tag') : t('Create Tag')}
                             </Button>
                         </CardFooter>
                     </form>

@@ -18,7 +18,7 @@ const InputOTP = React.forwardRef<
     {...props}
   />
 ))
-InputOTP.displayName = "InputOTP"
+InputOTP.displayName = i18next.t('InputOTP')
 
 const InputOTPGroup = React.forwardRef<
   React.ElementRef<"div">,
@@ -26,7 +26,7 @@ const InputOTPGroup = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("flex items-center", className)} {...props} />
 ))
-InputOTPGroup.displayName = "InputOTPGroup"
+InputOTPGroup.displayName = i18next.t('InputOTPGroup')
 
 const InputOTPSlot = React.forwardRef<
   React.ElementRef<"div">,

@@ -24,9 +24,9 @@ export default function Form({ category }: Props) {
     });
 
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Dashboard', href: '/dashboard' },
-        { title: 'Categories', href: '/categories' },
-        { title: isEditing ? 'Edit Category' : 'Create Category', href: '#' },
+        { title: t('Dashboard'), href: '/dashboard' },
+        { title: t('Categories'), href: '/categories' },
+        { title: isEditing ? t('Edit Category') : t('Create Category'), href: '#' },
     ];
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -40,41 +40,41 @@ export default function Form({ category }: Props) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={isEditing ? 'Edit Category' : 'Create Category'} />
+            <Head title={isEditing ? t('Edit Category') : t('Create Category')} />
             <div className="flex h-full flex-1 flex-col gap-4 p-4 max-w-2xl mx-auto w-full">
                 <Card>
                     <CardHeader>
-                        <CardTitle>{isEditing ? 'Edit Category' : 'Create Category'}</CardTitle>
+                        <CardTitle>{isEditing ? t('Edit Category') : t('Create Category')}</CardTitle>
                     </CardHeader>
                     <form onSubmit={handleSubmit}>
                         <CardContent className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name">{t('Name')}</Label>
                                 <Input
                                     id="name"
                                     value={data.name}
                                     onChange={(e) => setData('name', e.target.value)}
-                                    placeholder="Enter category name"
+                                    placeholder={t('Enter category name')}
                                 />
                                 {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="description">Description (Optional)</Label>
+                                <Label htmlFor="description">{t('Description (Optional)')}</Label>
                                 <Input
                                     id="description"
                                     value={data.description}
                                     onChange={(e) => setData('description', e.target.value)}
-                                    placeholder="Enter description"
+                                    placeholder={t('Enter description')}
                                 />
                                 {errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
                             </div>
                         </CardContent>
                         <CardFooter className="flex justify-between">
                             <Button variant="outline" asChild>
-                                <Link href="/categories">Cancel</Link>
+                                <Link href="/categories">{t('Cancel')}</Link>
                             </Button>
                             <Button type="submit" disabled={processing}>
-                                {isEditing ? 'Update Category' : 'Create Category'}
+                                {isEditing ? t('Update Category') : t('Create Category')}
                             </Button>
                         </CardFooter>
                     </form>

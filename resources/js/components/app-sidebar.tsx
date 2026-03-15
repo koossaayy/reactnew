@@ -18,22 +18,22 @@ import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: i18next.t('Dashboard'),
         href: dashboard(),
         icon: LayoutGrid,
     },
     {
-        title: 'Categories',
+        title: i18next.t('Categories'),
         href: '/categories',
         icon: FolderGit2,
     },
     {
-        title: 'Tags',
+        title: i18next.t('Tags'),
         href: '/tags',
         icon: BookOpen,
     },
     {
-        title: 'Articles',
+        title: i18next.t('Articles'),
         href: '/articles',
         icon: LayoutGrid,
     },
@@ -41,12 +41,12 @@ const mainNavItems: NavItem[] = [
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
+        title: i18next.t('Repository'),
         href: 'https://github.com/laravel/react-starter-kit',
         icon: FolderGit2,
     },
     {
-        title: 'Documentation',
+        title: i18next.t('Documentation'),
         href: 'https://laravel.com/docs/starter-kits#react',
         icon: BookOpen,
     },
